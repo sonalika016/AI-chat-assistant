@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Chat Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside id="sidebar">
+    <button id="new-chat">+ New chat</button>
+    <h2>History</h2>
+    <ul id="history"></ul>
+  </aside>
+
+  <main>
+    <header>
+      <div class="tone-group" role="radiogroup" aria-label="Tone">
+        <button class="tone active" data-tone="professional">Professional</button>
+        <button class="tone" data-tone="casual">Casual</button>
+        <button class="tone" data-tone="concise">Concise</button>
+      </div>
+      <button id="export" title="Download this chat as Markdown">Export chat</button>
+    </header>
+
+    <section id="messages" aria-live="polite">
+      <p class="empty">Ask anything. Pick a tone above to change how the AI answers.</p>
+    </section>
+
+    <form id="chat-form">
+      <textarea id="input" rows="1" placeholder="Type your message…" required></textarea>
+      <button id="send" type="submit">Send</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
