@@ -11,8 +11,11 @@ A real-time AI chat app with streaming replies, saved conversation history, and 
 - **Streaming replies:** text appears character by character as the AI responds.
 - **History sidebar:** reopen or delete any past conversation.
 - **Tone toggle (Vibe Check):** choose Professional, Casual, or Concise. The choice is sent to the backend and added to the AI's system instruction, so the next reply changes style right away.
-- **Export chat (extra feature):** download any conversation as a Markdown file.
 - **Persistence:** every conversation is saved in MongoDB with timestamps.
+### Extra Features
+ 
+- **Export chat:** download any conversation as a Markdown (`.md`) file, including timestamps for every message.
+- **Dark mode:** switch between light and dark themes with one click. Your choice is saved in the browser and remembered on your next visit. If you haven't chosen yet, the app follows your computer's theme setting.
 ## Tech Stack
  
 | Part | Technology |
@@ -72,6 +75,12 @@ python app.py
 ```
  
 5. Open **http://127.0.0.1:5000** in your browser.
+## How the Extra Features Work
+ 
+**Export chat.** The button calls `GET /api/conversations/<id>/export`. The backend reads the conversation from MongoDB, builds a Markdown file, and sends it back as a download. Start a chat first, then click **Export chat** in the header.
+ 
+**Dark mode.** The colours are CSS variables in `static/style.css`. Clicking **Dark mode** in the header sets a `data-theme="dark"` attribute on the page, which swaps in the dark colour set. The choice is stored in the browser's `localStorage` by `static/script.js`. This feature is frontend only, so it needs no backend changes.
+ 
 ## How the Tone Toggle Works
  
 The frontend sends the selected tone with every message. In `app.py`, the `TONES` dictionary maps each tone to an instruction that is added to the system prompt:
@@ -129,5 +138,8 @@ Never commit your `.env` file. It holds your API key and is listed in `.gitignor
 - Add user login
 - Rename conversations
 ## License
+ 
+Free to use for learning and personal projects.
+ 
  
 Free to use for learning and personal projects.
