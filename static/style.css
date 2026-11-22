@@ -6,6 +6,20 @@
   --line: #dbe3e7;
   --accent: #1d6f8a;
   --user: #1d6f8a;
+  --active: #e2eff3;
+  --danger: #b3261e;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1a20;
+  --panel: #17262e;
+  --ink: #e6eef2;
+  --muted: #8fa3ad;
+  --line: #2a3d47;
+  --accent: #2b8aa8;
+  --user: #1d6f8a;
+  --active: #223a46;
+  --danger: #ff8a80;
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
@@ -34,10 +48,10 @@ button:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent);
   padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 14px;
 }
 #history li:hover { background: var(--bg); }
-#history li.active { background: #e2eff3; }
+#history li.active { background: var(--active); }
 #history li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #history li button { border: 0; background: none; color: var(--muted); font-size: 16px; }
-#history li button:hover { color: #b3261e; }
+#history li button:hover { color: var(--danger); }
 
 /* Main */
 main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
@@ -48,7 +62,8 @@ header {
 .tone-group { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .tone { border: 0; background: none; padding: 7px 14px; font-size: 14px; color: var(--muted); }
 .tone.active { background: var(--accent); color: #fff; }
-#export {
+.header-actions { display: flex; gap: 10px; }
+#export, #theme {
   border: 1px solid var(--line); background: none; border-radius: 8px;
   padding: 7px 14px; font-size: 14px; color: var(--ink);
 }
@@ -71,8 +86,15 @@ header {
 #input {
   flex: 1; resize: none; max-height: 140px; padding: 11px 14px;
   border: 1px solid var(--line); border-radius: 10px; font: inherit;
+  background: var(--panel); color: var(--ink);
 }
 #send { padding: 0 22px; border: 0; border-radius: 10px; background: var(--accent); color: #fff; font-weight: 500; }
 #send:disabled { opacity: .5; cursor: not-allowed; }
 
 @media (max-width: 700px) { #sidebar { display: none; } .bubble { max-width: 92%; } }
+
+/* Smooth theme change */
+body, #sidebar, header, #chat-form, .bubble { transition: background-color .2s, color .2s, border-color .2s; }
+@media (prefers-reduced-motion: reduce) {
+  body, #sidebar, header, #chat-form, .bubble { transition: none; }
+}

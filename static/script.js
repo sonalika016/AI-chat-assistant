@@ -145,3 +145,20 @@ $("export").onclick = () => {
 };
 
 loadHistory();
+
+// ---------- Extra feature 2: dark mode toggle ----------
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  $("theme").textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  localStorage.setItem("theme", theme);
+}
+
+$("theme").onclick = () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
+};
+
+// On load: use the saved choice, or the computer's own setting
+const savedTheme = localStorage.getItem("theme");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
